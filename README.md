@@ -110,7 +110,8 @@ For showing the product before a real database is connected. `vercel.json` build
 
 1. Import the GitHub repository in Vercel (no framework preset; the settings come from `vercel.json`).
 2. Add environment variables: `HUSHHAWK_SUPER_ADMIN_EMAIL`, `HUSHHAWK_SUPER_ADMIN_PASSWORD` (12+ characters) and `HUSHHAWK_SECRETS_KEY` (a long random string).
-3. Deploy, sign in as the super admin, then sign up a demo company and approve it.
+3. Optional demo client: also set `HUSHHAWK_DEMO_EMAIL`, `HUSHHAWK_DEMO_PASSWORD` (10+ characters), `HUSHHAWK_DEMO_COMPANY` and `HUSHHAWK_DEMO_NAME`. An approved company with an active Business plan is created for that login whenever the demo database starts fresh.
+4. Redeploy after adding variables, then sign in.
 
 **Demo limits:** the database resets whenever Vercel starts a fresh instance (after idle time or a redeploy), and two instances don't share data. Background jobs run on incoming requests instead of a cron trigger. Use Cloudflare Workers + D1 (below) or a hosted database for real use.
 
