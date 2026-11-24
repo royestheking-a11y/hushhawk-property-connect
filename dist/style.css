@@ -192,6 +192,9 @@ body{font-size:15px}
 .hh-nav nav a:hover{background:var(--soft);color:var(--ink)}
 .hh-nav-cta{display:flex;align-items:center;gap:12px}
 .hh-nav-cta .hh-btn{height:38px;padding:0 18px;border-radius:999px}
+.hh-glass,.hh-nav-cta .hh-btn{white-space:nowrap;flex-shrink:0}
+.hh-nav .brand{white-space:nowrap;min-width:0}
+@media(max-width:420px){.hh-nav .brand>span:not(.mark){display:none}}
 .hh-link{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.88rem}
 .hh-link:hover{background:var(--soft)}
 .hh-link .ico{width:16px;height:16px;color:var(--sub)}
