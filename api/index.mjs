@@ -27,6 +27,31 @@ const env={DB:{
 }};
 for(const [key,value] of Object.entries(process.env))if(key.startsWith('HUSHHAWK_')||key.startsWith('TWILIO_'))env[key]=value;
 
+// Demo client: because the demo database resets, an approved company with an active plan is
+// recreated on start from HUSHHAWK_DEMO_COMPANY / HUSHHAWK_DEMO_EMAIL / HUSHHAWK_DEMO_PASSWORD.
+let seeded=null;
+async function seedDemo(){
+  const email=String(env.HUSHHAWK_DEMO_EMAIL||'').trim().toLowerCase(),password=String(env.HUSHHAWK_DEMO_PASSWORD||'');
+  if(!email||password.length<10||!env.HUSHHAWK_SUPER_ADMIN_EMAIL)return;
+  if(sqlite.prepare('SELECT id FROM users WHERE email = ?').get(email))return;
+  const origin='http://seed.internal';
+  const client=()=>{let cookie='';return async(path,body)=>{
+    const response=await worker.fetch(new Request(origin+path,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',...(cookie?{Cookie:cookie}:{})},body:JSON.stringify(body)}),env,ctx);
+    const set=response.headers.get('Set-Cookie');if(set)cookie=set.split(';')[0];
+    const out=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(`Demo seed ${path} failed: ${out.error||response.status}`);
+    return out;
+  };};
+  const owner=client(),admin=client();
+  await owner('/api/auth/signup',{acceptTerms:true,company:env.HUSHHAWK_DEMO_COMPANY||'Lakeside Living',name:env.HUSHHAWK_DEMO_NAME||'Demo Owner',email,password});
+  await admin('/api/auth/login',{email:env.HUSHHAWK_SUPER_ADMIN_EMAIL,password:env.HUSHHAWK_SUPER_ADMIN_PASSWORD});
+  const company=sqlite.prepare('SELECT company_id FROM users WHERE email = ?').get(email).company_id;
+  await admin('/api/super/company',{id:company,action:'approve'});
+  await admin('/api/super/subscription',{companyId:company,action:'activate',planId:env.HUSHHAWK_DEMO_PLAN||'business',months:12,reason:'Demo account'});
+  await owner('/api/company/profile',{name:env.HUSHHAWK_DEMO_COMPANY||'Lakeside Living',phone:'+1 512 555 0100',city:'Austin',units:'240',billingEmail:email});
+  console.log('Demo company ready');
+}
+
 // Background work is awaited before the function returns, so it isn't cut off.
 let pending=[];
 const ctx={waitUntil(promise){pending.push(Promise.resolve(promise).catch(error=>console.error('background task failed',error)));}};
@@ -43,6 +68,8 @@ export default async function handler(req,res){
     for await(const chunk of req)chunks.push(chunk);
     const request=new Request(url,{method:req.method,headers:Object.entries(req.headers).filter(([,v])=>typeof v==='string'),
       body:['GET','HEAD'].includes(req.method)?undefined:Buffer.concat(chunks)});
+    seeded??=seedDemo().catch(error=>{console.error(error);seeded=null;});
+    await seeded;
     const response=await worker.fetch(request,env,ctx);
     if(Date.now()-lastTick>30000){lastTick=Date.now();ctx.waitUntil(worker.scheduled({},env,ctx));}
     const body=Buffer.from(await response.arrayBuffer());
