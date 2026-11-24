@@ -190,7 +190,8 @@ body{font-size:15px}
 .hh-nav nav{display:flex;gap:4px}
 .hh-nav nav a{padding:8px 12px;border-radius:8px;color:#3d4a60;text-decoration:none;font-size:.9rem;font-weight:550;transition:background .15s,color .15s}
 .hh-nav nav a:hover{background:var(--soft);color:var(--ink)}
-.hh-nav-cta{display:flex;align-items:center;gap:6px}
+.hh-nav-cta{display:flex;align-items:center;gap:12px}
+.hh-nav-cta .hh-btn{height:38px;padding:0 18px;border-radius:999px}
 .hh-link{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.88rem}
 .hh-link:hover{background:var(--soft)}
 .hh-link .ico{width:16px;height:16px;color:var(--sub)}
@@ -488,6 +489,8 @@ body{font-size:15px}
 @media(max-width:720px){
   .hh-wrap{width:calc(100% - 32px)}
   .hh-glass{padding:0 13px}
+  .hh-nav-cta{gap:8px}
+  .hh-nav-cta .hh-btn{padding:0 13px;font-size:.8rem}
   .hh-ctas .hh-btn{width:100%}
   .win{aspect-ratio:auto;height:470px}
   .win-body{grid-template-columns:1fr}.win-side{display:none}
