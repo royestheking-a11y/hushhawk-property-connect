@@ -90,7 +90,7 @@ function emailHtml({heading='',paragraphs=[],cta=null,footer=''}){
   return `<!doctype html><html><body style="margin:0;background:#f5f7fb;font-family:Inter,Arial,sans-serif;color:#0e1a2f">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:28px 12px"><tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #e3e8f0;border-radius:14px">
-<tr><td style="padding:22px 28px;border-bottom:1px solid #eef1f5;font-weight:800;letter-spacing:.04em;color:#082b63">HUSHHAWK <span style="font-weight:600;color:#1456c0">Property Connect</span></td></tr>
+<tr><td style="padding:22px 28px;border-bottom:1px solid #eef1f5;font-weight:800;letter-spacing:.04em;color:#082b63">HUSHHAWK <span style="font-weight:600;color:#1456c0">Property Management</span></td></tr>
 <tr><td style="padding:26px 28px">${heading?`<h1 style="margin:0 0 14px;font-size:20px;line-height:1.3">${htmlEscape(heading)}</h1>`:''}
 ${paragraphs.map(p=>`<p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#33405a;white-space:pre-wrap">${htmlEscape(p)}</p>`).join('')}
 ${cta?`<p style="margin:22px 0 6px"><a href="${htmlEscape(cta.url)}" style="display:inline-block;background:#1456c0;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:10px">${htmlEscape(cta.label)}</a></p><p style="margin:0;font-size:12px;color:#8a95a8;word-break:break-all">${htmlEscape(cta.url)}</p>`:''}
@@ -113,7 +113,7 @@ async function systemEmail(env,{to,subject,heading,paragraphs,cta,footer}){
   try{
     const cfg=await emailConfig(env);
     if(!cfg||!to)return false;
-    const text=[heading,...paragraphs,cta?`${cta.label}: ${cta.url}`:'','— HushHawk Property Connect'].filter(Boolean).join('\n\n');
+    const text=[heading,...paragraphs,cta?`${cta.label}: ${cta.url}`:'','— HushHawk Property Management'].filter(Boolean).join('\n\n');
     const result=await postmarkSend(cfg,{to,subject,text,html:emailHtml({heading,paragraphs,cta,footer}),fromName:'HushHawk',metadata:{kind:'system'}});
     if(result.status!=='sent')console.error('system email failed',result.error||result.status);
     return result.status==='sent';
@@ -264,7 +264,7 @@ JOB_HANDLERS['email.system']=async(env,p)=>{
   const cfg=await emailConfig(env).catch(()=>null);
   if(!cfg)return; // Email isn't set up: links stay available on screen instead.
   const result=await postmarkSend(cfg,{to:p.to,subject:p.subject,
-    text:[p.heading,...p.paragraphs,p.cta?`${p.cta.label}: ${p.cta.url}`:'','— HushHawk Property Connect'].filter(Boolean).join('\n\n'),
+    text:[p.heading,...p.paragraphs,p.cta?`${p.cta.label}: ${p.cta.url}`:'','— HushHawk Property Management'].filter(Boolean).join('\n\n'),
     html:emailHtml({heading:p.heading,paragraphs:p.paragraphs,cta:p.cta}),fromName:'HushHawk',metadata:{kind:'system'}});
   if(result.status!=='sent')throw new Error(result.error||'Email provider error');
 };

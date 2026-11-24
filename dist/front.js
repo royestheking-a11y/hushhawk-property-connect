@@ -204,7 +204,7 @@ export function marketing({brand,icon}){
   </div></section>
 
   <section class="hh-sec" id="contact"><div class="hh-wrap contact">
-    <div class="hh-head left reveal"><p class="hh-kicker">Request a demo</p><h2>See Property Connect with your own workflow.</h2><p>Tell us a little about your portfolio. We’ll reply within one business day to set up a walkthrough.</p>
+    <div class="hh-head left reveal"><p class="hh-kicker">Request a demo</p><h2>See HushHawk with your own workflow.</h2><p>Tell us a little about your portfolio. We’ll reply within one business day to set up a walkthrough.</p>
       <ul class="contact-points"><li>${icon('check')} A guided tour of the inbox, AI and maintenance</li><li>${icon('check')} Help planning your number and email setup</li><li>${icon('check')} No commitment</li></ul></div>
     <form class="contact-form reveal" data-home-form="lead" novalidate>
       <label>Your name<input name="name" required maxlength="80" autocomplete="name"></label>
@@ -378,7 +378,7 @@ export function login({brand,icon}){
 // Draft legal pages. They must be reviewed by a lawyer and completed before launch.
 const LEGAL={
   terms:['Terms of Service',[
-    ['Agreement','These terms govern use of HushHawk Property Connect (the “Service”) provided by [HushHawk legal entity name] (“HushHawk”). By creating an account or using the Service you agree to them on behalf of your company.'],
+    ['Agreement','These terms govern use of HushHawk Property Management (the “Service”) provided by [HushHawk legal entity name] (“HushHawk”). By creating an account or using the Service you agree to them on behalf of your company.'],
     ['Accounts','You are responsible for your team’s accounts, keeping credentials secure, and the accuracy of information you add. Turn on two-step sign-in for owners and admins.'],
     ['Acceptable use','Do not use the Service to send unsolicited or unlawful messages, to harass anyone, or to process data you have no right to process. Follow the Messaging Terms for SMS and calls.'],
     ['AI features','AI suggestions can be wrong. You are responsible for reviewing replies and for messages sent from your account, including automatic replies you enable.'],
@@ -388,7 +388,7 @@ const LEGAL={
     ['Liability','[Limitation of liability, indemnity, governing law and dispute resolution to be completed by counsel.]'],
     ['Contact','[Legal contact email and postal address.]']]],
   privacy:['Privacy Policy',[
-    ['Who we are','[HushHawk legal entity name and address] provides Property Connect to property management companies. For tenant data in a company’s workspace, that company is the controller and HushHawk processes it on their behalf.'],
+    ['Who we are','[HushHawk legal entity name and address] provides HushHawk Property Management to property management companies. For tenant data in a company’s workspace, that company is the controller and HushHawk processes it on their behalf.'],
     ['What we collect','Account details (name, email, company), workspace content (contacts, properties, conversations, files), usage and billing records, and technical logs needed to run and secure the Service.'],
     ['How we use it','To provide the Service, deliver messages, run AI features you enable, bill subscriptions, provide support, and keep the Service secure. We do not sell personal information.'],
     ['Service providers','We use providers for hosting, messaging (for example Twilio), email (Postmark), payments (Stripe) and AI (Anthropic). They process data only to provide their service. [Confirm the final list and data processing agreements.]'],

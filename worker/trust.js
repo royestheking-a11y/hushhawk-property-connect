@@ -200,7 +200,7 @@ async function publicLead(request,env,url){
   const lead={id:acctId(),name,email,company:text(input.company,120),phone:text(input.phone,40),units:text(input.units,20),message:text(input.message,2000)};
   await exec(db,'INSERT INTO leads (id,name,email,company,phone,units,message,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?)',lead.id,lead.name,lead.email,lead.company,lead.phone,lead.units,lead.message,acctNow(),acctNow());
   await emailSuperAdmins(db,`New demo request: ${lead.company||lead.name}`,[`${lead.name} <${lead.email}>${lead.phone?' · '+lead.phone:''}`,`${lead.company||'No company given'}${lead.units?` · ${lead.units} units`:''}`,lead.message||'(no message)'],'/#super/leads');
-  await queueEmail(db,{to:lead.email,subject:'Thanks for your interest in HushHawk Property Connect',paragraphs:[`Hi ${lead.name}, thanks for asking about Property Connect. We’ll reply within one business day to set up a walkthrough.`,'In the meantime you can try the interactive demo with fictional data.'],cta:{label:'Open the demo',url:url.origin+'/#demo'}});
+  await queueEmail(db,{to:lead.email,subject:'Thanks for your interest in HushHawk Property Management',paragraphs:[`Hi ${lead.name}, thanks for asking about HushHawk Property Management. We’ll reply within one business day to set up a walkthrough.`,'In the meantime you can try the interactive demo with fictional data.'],cta:{label:'Open the demo',url:url.origin+'/#demo'}});
   return json({ok:true});
 }
 

@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "HushHawk Property Connect",
-  "short_name": "Property Connect",
+  "name": "HushHawk Property Management",
+  "short_name": "HushHawk",
   "start_url": "/#dashboard",
   "scope": "/",
   "display": "standalone",

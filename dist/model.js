@@ -9,6 +9,8 @@ const daysAgo = (days, hour = 10) => {
   const date = new Date();
   date.setDate(date.getDate() - days);
   date.setHours(hour, 0, 0, 0);
+  // Never in the future: early in the day, "today at 10:00" hasn't happened yet.
+  if (date.getTime() > Date.now() - 1800000) date.setTime(Date.now() - 1800000);
   return date.toISOString();
 };
 export const now = () => new Date().toISOString();

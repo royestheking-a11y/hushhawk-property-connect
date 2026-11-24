@@ -202,7 +202,7 @@ const head = (title,description,actions='') => `<div class="heading"><div><h1>${
 const card = (title,content,action='') => `<section class="card"><div class="cardhead"><h2>${title}</h2>${action}</div>${content}</section>`;
 const empty = text => `<p class="empty">${esc(text)}</p>`;
 const table = (headings, rows) => rows.length ? `<div class="tablewrap"><table><thead><tr>${headings.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : empty('No records in this view.');
-const brand = () => `<a class="brand" href="#home"><span class="mark">${icon('brand')}</span><span>Property Connect<small>BY HUSHHAWK</small></span></a>`;
+const brand = () => `<a class="brand" href="#home"><span class="mark">${icon('brand')}</span><span>HushHawk<small>PROPERTY MANAGEMENT</small></span></a>`;
 const nav = [
   ['Workspace',[['dashboard','Overview','dashboard'],['inbox','Unified Inbox','inbox'],['voice','Voice Center','phone'],['outbox','Outbox & Reminders','calendar'],['assistant','AI Assistant','ai'],['automations','Automations','flow']]],
   ['Portfolio',[['contacts','Contacts','people'],['properties','Properties & Units','building'],['maintenance','Maintenance','tool'],['tasks','Tasks','tasks'],['calendar','Calendar','calendar']]],
