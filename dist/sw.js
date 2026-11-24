@@ -1,5 +1,5 @@
 const prefix='hushhawk-shell-';
-const version=prefix+'16';
+const version=prefix+'17';
 const paths=['./','./index.html','./style.css','./app.js','./model.js','./workspace.js','./front.js','./accounts.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 
 self.addEventListener('install',event=>{

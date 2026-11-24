@@ -83,7 +83,7 @@ export function marketing({brand,icon}){
   return `<div class="hh">
   <header class="hh-nav"><div class="hh-wrap hh-nav-in">${brand()}
     <nav aria-label="Sections">${nav.map(([id,label])=>`<a href="#${id}" data-scroll="${id}">${label}</a>`).join('')}</nav>
-    <div class="hh-nav-cta"><a class="hh-link" href="#login">${icon('lock')}<span>Sign in</span></a><a class="hh-btn sm" href="#contact" data-scroll="contact">Request a demo</a></div>
+    <div class="hh-nav-cta"><a class="hh-glass" href="#login">Sign in</a><a class="hh-btn sm" href="#contact" data-scroll="contact">Request a demo</a></div>
   </div></header>
 
   <main id="main">
